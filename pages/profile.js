@@ -6,7 +6,7 @@ import Awards from "../components/Awards";
 import {connect, useDispatch } from "react-redux";
 //import { useEffect } from "react";
 import Summary from "../components/Summary";
-import {Upload, Information} from '@carbon/icons-react';
+import {Upload, Information, Download} from '@carbon/icons-react';
 import {Toggletip, ToggletipButton, ToggletipContent } from '@carbon/react';
 import axios from "axios";
 import {AddContact} from "../redux/actions/updateContact";
@@ -17,7 +17,12 @@ import {AddAward} from "../redux/actions/updateAwards";
 import {useEffect} from "react";
 import { Grid, Column, Tile, Row } from '@carbon/react';
 import { Card } from '@carbon/ibmdotcom-react';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
+const printDocument = () => {
+
+}
 
 const Profile = (props) => {
   const dispatch = useDispatch();
@@ -32,7 +37,7 @@ const Profile = (props) => {
 
   return (
       <>
-        <div className="cds--grid" style={{paddingTop: '2.2rem'}}>
+        <div id={'profile-page'} className="cds--grid" style={{paddingTop: '2.2rem'}}>
             <Row>
               <Column lg={16} md={8} sm={4}>
                 <Tile >
@@ -45,6 +50,31 @@ const Profile = (props) => {
                           'Content-Type' : 'application/json'
                         }
                       })
+
+                    }} />
+                    <Download size={16} onClick={() => {
+                      const input = document.getElementById('profile-page');
+                      const divHeight = input.clientHeight
+                      const divWidth = input.clientWidth
+                      const ratio = divHeight / divWidth;
+                      html2canvas(input, {
+                        scale:1,
+                        scrollY: 0, scrollX: 0,
+                        windowWidth: input.scrollWidth,
+                        windowHeight: input.scrollHeight
+                      })
+                          .then((canvas) => {
+                           
+                            const imgData = canvas.toDataURL('image/png');
+                            const pdf = new jsPDF({
+                              orientation: 'landscape',
+                            });
+                            const imgProps= pdf.getImageProperties(imgData);
+                            const pdfWidth = pdf.internal.pageSize.getWidth();
+                            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                            pdf.save('download.pdf');
+                          })
 
                     }} />
                   </h2>
