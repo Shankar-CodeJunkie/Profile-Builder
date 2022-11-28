@@ -31,4 +31,4 @@ You can use the link [ProfileBuilder](https://profilebuilder.herokuapp.com/profi
 
 ### How it looks ?
 
-[Profile Builder](./public/homepage.jpg)
+![Profile Builder](./public/homepage.jpg)
