@@ -6,7 +6,8 @@ const express = require('express');
 //const env = require('dotenv').config()
 
 const dev = process.env.NODE_ENV !== 'production'
-const hostname = 'localhost'
+//const hostname = 'localhost'
+const hostname = 'buildmyprofile.netlify.app'
 const port = 3001
 const app = next({dev, hostname, port})
 const handle = app.getRequestHandler()
