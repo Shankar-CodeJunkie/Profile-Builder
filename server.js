@@ -8,7 +8,7 @@ const express = require('express');
 const dev = process.env.NODE_ENV !== 'production'
 //const hostname = 'localhost'
 const hostname = 'buildmyprofile.netlify.app'
-const port = 3001
+const port = process.env.PORT || 3001
 const app = next({dev, hostname, port})
 const handle = app.getRequestHandler()
 const bodyParser = require('body-parser');
