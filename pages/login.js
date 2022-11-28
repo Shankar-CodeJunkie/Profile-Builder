@@ -69,7 +69,7 @@ const login = (props) => {
                       type="submit"
                       className={'button-center'}
                       renderIcon={FcGoogle}
-                      onClick={() => window.open('https://buildmyprofile.netlify.app/login/federated/google')}
+                      onClick={() => window.open('https://profilebuilder.herokuapp.com/login/federated/google')}
                   >
                     Login
                   </Button>
