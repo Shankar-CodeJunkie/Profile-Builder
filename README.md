@@ -28,3 +28,7 @@ You can use the link [ProfileBuilder](https://profilebuilder.herokuapp.com/profi
   - Carbon V11.
     
 `
+
+### How it looks ?
+
+[Profile Builder](./public/homepage.jpg)
