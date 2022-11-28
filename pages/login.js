@@ -69,7 +69,7 @@ const login = (props) => {
                       type="submit"
                       className={'button-center'}
                       renderIcon={FcGoogle}
-                      onClick={() => window.open('http://localhost:3001/login/federated/google')}
+                      onClick={() => window.open('https://https://buildmyprofile.netlify.app/login/federated/google')}
                   >
                     Login
                   </Button>
