@@ -18,7 +18,10 @@ const passport = require('passport')
 const dbo = require('./database-connection/mongodb');
 
 console.log('env', process.env.name)
-
+const nodeProcess = require('process');
+nodeProcess.on('uncaughtException', function (error) {
+  console.log('*** Unhandled exception in Profile UI :' + error.stack);
+});
 
 //const googleStrategy = google.Strategy;
 
@@ -102,6 +105,7 @@ app.prepare().then(async() => {
 
 
   server.get('/login', async(req, res) => {
+    console.log('server login page')
     const parsedUrl = parse(req.url, true)
     const {pathname, query} = parsedUrl
     console.log(`parsedurl ${JSON.stringify(parsedUrl)}`)
@@ -133,9 +137,6 @@ app.prepare().then(async() => {
     console.log('coming to read profile' , req.body.data._id);
     res.setHeader('Content-Type', 'application/json')
     return res.json({data: true})
-    //return true;
-   // let userDoc = await dbo.getDocument({id: req.body.data._id})
-    //console.log('userDoc', userDoc)
   });
 
 

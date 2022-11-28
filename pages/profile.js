@@ -64,7 +64,7 @@ const Profile = (props) => {
                         windowHeight: input.scrollHeight
                       })
                           .then((canvas) => {
-                           
+
                             const imgData = canvas.toDataURL('image/png');
                             const pdf = new jsPDF({
                               orientation: 'landscape',
@@ -109,9 +109,9 @@ Profile.getInitialProps = async ({req, reduxStore}) => {
 
 
   return {
-    user: req.session.passport,
+    user: req.session?.passport,
     page: 'profile',
-    userProfile: req.user.profile
+    userProfile: req.user?.profile
   }
 }
 
