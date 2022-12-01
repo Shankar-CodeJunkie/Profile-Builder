@@ -1,19 +1,18 @@
-//@import '~@carbon/type/scss/font-face/mono';
-//@import '~@carbon/type/scss/font-face/sans';
-//@import '~@carbon/ibmdotcom-styles/scss/components/masthead/masthead.scss';
-//@import '~@carbon/ibmdotcom-styles/scss/components/footer/index.scss';
-//@import '~@carbon/ibmdotcom-styles/scss/components/footer/footer';
-//@import '~@carbon/ibmdotcom-styles/scss/components/layout/layout';
-//@import '~@carbon/grid/scss/grid.scss';
-//@import '~@carbon/ibmdotcom-styles';
-//@import '~@carbon/type/scss/styles';
-//@import './node_modules/carbon-components/scss/globals/scss/styles.scss';
-//@use '~@carbon/colors';
-@use '~@carbon/themes/scss/themes';
+//@use '~@carbon/themes/scss/themes';
 //@import '@carbon/themes/scss/themes';
+@use '~@carbon/react/scss/themes';
+/*@use '~@carbon/react/scss/theme' with (
+  $theme: themes.$g100,
+);*/
 @use '~@carbon/react';
 @use '~@carbon/styles';
 @use '~@carbon/styles/scss/grid';
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+@use '@carbon/react/scss/theme' as *;
+@use './mixins.scss' as *;
+//@use './overrides.scss';
 @include grid.flex-grid();
 @import '~carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/theme-maps';
 //@import '~bootstrap/scss/bootstrap';
@@ -24,6 +23,31 @@
 @import '@carbon/ibmdotcom-styles/scss/components/layout/layout';
 @import '@carbon/ibmdotcom-styles';
 
+
+/// Remove overrides once Carbon bugs are fixed upstream.
+/// Need grid option to not add page gutters at large viewports, to also use when nesting grids
+/// @link https://github.com/carbon-design-system/carbon/issues/2792
+@media (min-width: 42rem) {
+  .cds--grid--no-gutter {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/// Padding was introduced in 10.3.0, needs an option to let grid set the viewport gutter
+/// @link https://github.com/carbon-design-system/carbon/issues/3010
+.cds--content {
+  margin-top: 3rem;
+  background: var(--cds-background);
+}
+
+.cds--content .cds--css-grid {
+  max-width: 100%;
+  @include breakpoint(md) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
 
 .intro {
   background-image: url('./../public/login.png');
@@ -124,20 +148,6 @@
 //$carbon--theme: $carbon--theme--g100;
 //@include carbon--theme();
 
-.login-component {
-  justify-content: center;
-  display: block;
-  position: relative;
-  //box-shadow: 11px 12px 14px 12px white;
-  padding: 40px 40px 40px 40px;
-  border-radius: 60px;
-  background-color: lightgrey;
-}
-.login-page {
-  justify-content: center;
-  padding-top: 30px;
-}
-
 .button-center {
   justify-content: center
 }
@@ -187,6 +197,7 @@
 
 .info-card__heading {
   @include type-style('productive-heading-01');
+  color: #fafafa;
 }
 
 .main__heading {
@@ -204,4 +215,96 @@
 
 .cds--tile {
   margin-bottom: 0.5rem !important;
+}
+
+.info-card {
+  margin-top: $spacing-09;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1rem;
+
+  svg {
+    margin-top: $spacing-09;
+  }
+
+}
+
+.login-page1 {
+  background-image: url("./../public/login_background.jpg");
+}
+
+.basic-grid {
+  display: grid;
+  gap: 1rem;
+
+  /* 1 too skinny, too much code */
+  /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; */
+
+  /* 2 cleaner code */
+  /* grid-template-columns: repeat(12, 1fr); */
+
+  /* 3  better sizing, but overflows */
+  /* grid-template-columns: repeat(12, minmax(240px, 1fr)); */
+
+  /* 4 final */
+  //grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min-content, 500px));
+}
+
+//copied from carbon
+
+.info-section__heading {
+  @include carbon--type-style('heading-01');
+}
+
+.info-card {
+  margin-top: $spacing-09;
+  display: flex;
+  flex-direction: column;
+
+  svg {
+    margin-top: $spacing-09;
+  }
+
+  // top border in only small breakpoints to prevent overrides
+  @include carbon--breakpoint-down(md) {
+    &:not(:nth-child(2)) {
+      border-top: 1px solid $ui-03;
+      padding-top: $spacing-09;
+    }
+  }
+
+  // left border in just the 2nd column items
+  @include carbon--breakpoint(md) {
+    &:nth-child(odd) {
+      border-left: 1px solid $ui-03;
+    }
+  }
+
+  // left border in all items
+  @include carbon--breakpoint(lg) {
+    margin-top: 0;
+    border-left: 1px solid $ui-03;
+
+    svg {
+      margin-top: $layout-06;
+    }
+  }
+}
+
+.info-card__heading {
+  @include carbon--type-style('productive-heading-03');
+  color: black;
+}
+
+.info-card__body {
+  margin-top: $spacing-01;
+  padding-top: 50px;
+  flex-grow: 1; // fill space so icons are bottom aligned
+  @include type-style('body-long-01');
+
+  // prevent large line lengths between small and medium viewports
+  @include carbon--breakpoint-between(321px, md) {
+    max-width: 75%;
+  }
 }

@@ -1,10 +1,22 @@
-//import { Card } from '@carbon/ibmdotcom-react';
-import {Card, Col, Container} from "react-bootstrap";
-import {Form, Stack, TextInput, TextArea, Button, SelectItem,Select, Heading} from '@carbon/react'
+import { Card } from '@carbon/ibmdotcom-react';
+import {Form, Stack, TextInput, TextArea, SelectItem,Select, Heading} from '@carbon/react'
 import {Add} from '@carbon/icons-react';
 import {FcGoogle} from 'react-icons/fc';
 import Background from './../public/login.png'
-import {Grid, Row, Column} from '@carbon/react';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  Button,
+  Tabs,
+  Tab,
+  TabList,
+  TabPanels,
+  TabPanel,
+  Grid,
+  Column,
+  Tile,
+  AspectRatio
+} from '@carbon/react';
 /*const login = (props) => {
   return (
       <div className={'intro'}>
@@ -46,21 +58,28 @@ import {Grid, Row, Column} from '@carbon/react';
       </div>
   )
 }*/
-
+import Image from 'next/image'
+import profilePic from './../public/login_background.jpg'
 const login = (props) => {
   return (
-      <>
-          <Row style={{paddingTop: '3rem'}}>
-            <Column lg={8} md={4} sm={2}> </Column>
-            <Column style={{float:'right'}} lg={8} md={4} sm={2}>
-              <Heading className={'main__heading'}>Profile Builder</Heading>
-              <div className={'info-card__heading'} style={{ marginBottom: '1vh'}}>
-                Build your resume in less than 5 seconds, using predefined sections approved by recruiters worldwide
-              </div>
-              <div style={{marginBottom:"1vh", color:'black'}}>
-                Try it for free.
-              </div>
-              <Form >
+      <Grid className="landing-page" fullWidth>
+
+        <div style={{marginTop: '20vh'}}></div>
+
+        <Column lg={16} md={8} sm={4}>
+          <Grid>
+            <Column lg={8} md={4} sm={4}>
+              <Tile style={{borderRadius: '25px'}}>
+                 <Heading className={'info-card__heading'}>Profile Builder</Heading>
+                <p className="info-card__body">
+                  Build your resume in less than 5 seconds, using predefined sections approved by recruiters worldwide
+                  </p>
+
+              </Tile>
+            </Column>
+            <Column lg={8} md={4} sm={4}>
+
+              <Form style={{paddingTop: '35px'}} >
                 <Stack gap={2}>
 
                   <Button
@@ -69,18 +88,24 @@ const login = (props) => {
                       type="submit"
                       className={'button-center'}
                       renderIcon={FcGoogle}
-                      onClick={() => window.open('https://profilebuilder.herokuapp.com/login/federated/google')}
+                      onClick={() => window.open('https://profilebuilder.herokuapp.com//login/federated/google')}
                   >
-                    Login
+                    Login with Google
                   </Button>
                 </Stack>
               </Form>
 
-
-
             </Column>
-          </Row>
-      </>
+
+
+          </Grid>
+
+        </Column>
+
+
+
+
+      </Grid>
   )
 }
 
