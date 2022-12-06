@@ -849,7 +849,7 @@
     react-autosuggest "^10.1.0"
     window-or-global "^1.0.1"
 
-"@carbon/ibmdotcom-services@1.40.0":
+"@carbon/ibmdotcom-services@1.40.0", "@carbon/ibmdotcom-services@^1.40.0":
   version "1.40.0"
   resolved "https://registry.yarnpkg.com/@carbon/ibmdotcom-services/-/ibmdotcom-services-1.40.0.tgz#210ce20b76ab94e032ac32aa6d985a275ad4fd96"
   integrity sha512-qinf2r+8NGu5+twLK4Pndedago4xfZ9LA/6bKVQ4f1IXGWAAdCe1rWXERqtjT6p7g/AHHHnhJeLWqtB1h4TqpA==
